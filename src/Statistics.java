@@ -1,4 +1,3 @@
-import java.util.Comparator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -7,7 +6,7 @@ public class Statistics {
     SortedMap<String, Integer> wordsDictionary;
 
     public Statistics() {
-        wordsDictionary = new TreeMap<String, Integer>();
+        wordsDictionary = new TreeMap<>();
     }
 
     public SortedMap<String, Integer> getWordsDictionary() {

@@ -7,9 +7,15 @@ public class InputStatistics {
     Scanner scan;
     Statistics wordsDictionary;
 
-    InputStatistics(String inputFile, Statistics words) throws FileNotFoundException {
-        scan = new Scanner(new FileInputStream(inputFile), StandardCharsets.UTF_8);
+    InputStatistics(String inputFile, Statistics words) {
         wordsDictionary = words;
+        try{
+            scan = new Scanner(new FileInputStream(inputFile), StandardCharsets.UTF_8);
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Error while reading input file: " + e.getLocalizedMessage());
+        }
     }
 
     public void inputData() {
