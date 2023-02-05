@@ -4,43 +4,27 @@ import java.util.*;
 
 public class OutputStatistics {
     Writer fout;
-    Statistics dictionary;
+    Statistics wordsDictionary;
 
-    public OutputStatistics(String outputFile, Statistics dict) throws FileNotFoundException, UnsupportedEncodingException {
-        fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
-        //fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "UTF-8"));
-        //fout = new PrintWriter(new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(outputFile)), "UTF-8"));
-        dictionary = dict;
+    OutputStatistics(String outputFile, Statistics words) throws FileNotFoundException {
+        fout = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), StandardCharsets.UTF_8));
+        wordsDictionary = words;
     }
 
     public void outputData() throws IOException {
-//        Comparator<String> comparator = new MyComparator(dictionary.getDictionary());
-//        SortedMap<String, Integer> sortedMap = new TreeMap<>(comparator);
-//        sortedMap.putAll(dictionary.getDictionary());
-//
-//        for (Object o : sortedMap.keySet()) {
-//            //System.out.println(o + ";" + sortedMap.get(o) + ";");
-//            fout.write((o + ";" + sortedMap.get(o) + "\n").getBytes());
-//        }
 
-        ArrayList<Record> sortedDictionary = new ArrayList<>();
-        for (String o : dictionary.getDictionary().keySet()) {
-            sortedDictionary.add(new Record(o, dictionary.getDictionary().get(o)));
+        ArrayList<Record> sortedWordsDictionary = new ArrayList<>();
+        for (Map.Entry<String, Integer> o : wordsDictionary.getWordsDictionary().entrySet()) {
+            sortedWordsDictionary.add(new Record(o.getKey(), o.getValue()));
         }
-        Comparator<Record> comparator = new MyComparator();
-        Collections.sort(sortedDictionary, comparator);
 
-//        for (Object o : dictionary.getDictionary().keySet()) {
-//            System.out.println(o + ";" + dictionary.getDictionary().get(o) + ";");
-//        }
+        //List.sort(sortedWordsDictionary, new recordComparator());
+        sortedWordsDictionary.sort(new recordComparator());
 
-        for (Record o : sortedDictionary) {
-            //System.out.println(o.word + ";" + o.number + "\n");
-            //fout.write((o.word + ";" + o.number + "\n").getBytes());
-            //fout.println(o.word + ";" + o.number);
-            fout.write(o.word + ";" + o.number + ";" + (double) o.number / dictionary.getAllWordsNumber() + "\n");
+        for (Record o : sortedWordsDictionary) {
+            fout.write(o.word + ";" + o.number + ";" + (double) o.number / wordsDictionary.getAllWordsNumber() + "\n");
         }
-        fout.flush();
+
         fout.close();
 
     }

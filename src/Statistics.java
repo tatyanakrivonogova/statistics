@@ -4,29 +4,30 @@ import java.util.TreeMap;
 
 public class Statistics {
     int allWordsNumber = 0;
-    SortedMap<String, Integer> dictionary;
+    SortedMap<String, Integer> wordsDictionary;
 
     public Statistics() {
-        dictionary = new TreeMap<String, Integer>();
+        wordsDictionary = new TreeMap<String, Integer>();
     }
 
-    public SortedMap<String, Integer> getDictionary() {
-        return dictionary;
+    public SortedMap<String, Integer> getWordsDictionary() {
+        return wordsDictionary;
     }
 
     public int getAllWordsNumber() {
         return allWordsNumber;
     }
 
-    public void addWord(String value) {
-        if (value.length() == 0) {
+    public void addWord(String word) {
+        if (word.length() == 0) {
             return;
         }
-        if (dictionary.get(value) == null) {
-            dictionary.put(value, 1);
-        } else {
-            dictionary.put(value, dictionary.get(value) + 1);
-        }
+        wordsDictionary.merge(word, 1, Integer::sum);
+//        if (wordsDictionary.get(word) == null) {
+//            wordsDictionary.put(word, 1);
+//        } else {
+//            wordsDictionary.put(word, wordsDictionary.get(word) + 1);
+//        }
         ++allWordsNumber;
     }
 }

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Lab1 {
@@ -6,15 +5,11 @@ public class Lab1 {
 
         Statistics wordsInFile = new Statistics();
 
-        InputStatisctics input = new InputStatisctics(args[0], wordsInFile);
+        InputStatistics input = new InputStatistics(args[0], wordsInFile);
         input.inputData();
 
         OutputStatistics output = new OutputStatistics(args[1], wordsInFile);
         output.outputData();
-
-//        wordsInFile.addWord("hello");
-//        wordsInFile.addWord("world");
-//        wordsInFile.addWord("hello");
 
     }
 }
