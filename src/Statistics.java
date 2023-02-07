@@ -1,15 +1,14 @@
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class Statistics {
     int allWordsNumber = 0;
-    SortedMap<String, Integer> wordsDictionary;
+    HashMap<String, Integer> wordsDictionary;
 
     public Statistics() {
-        wordsDictionary = new TreeMap<>();
+        wordsDictionary = new HashMap<>();
     }
 
-    public SortedMap<String, Integer> getWordsDictionary() {
+    public HashMap<String, Integer> getWordsDictionary() {
         return wordsDictionary;
     }
 
